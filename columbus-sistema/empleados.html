@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Sistema de Gestión - Columbus & Cia</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+<span>Sistema de Gestión - Columbus & Cia</span>
+<button class="btn-logout" onclick="cerrarSesion()">Cerrar Sesión</button>
+</header>
+
+<div class="container">
+
+<!-- ================= BOTONES DE NAVEGACIÓN ================= -->
+<div class="nav-buttons">
+<button class="nav-btn active" onclick="mostrarSeccion('empleado')">
+Información del Empleado
+</button>
+
+<button class="nav-btn" onclick="mostrarSeccion('contrato')">
+Información del Contrato
+</button>
+
+<button class="nav-btn" onclick="mostrarSeccion('seguridad')">
+Seguridad Social
+</button>
+
+<button class="nav-btn" onclick="mostrarSeccion('entorno')">
+    Entorno Familiar
+</button>
+
+</div>
+
+<!-- ================= EMPLEADO ================= -->
+<div id="seccionEmpleado">
+
+<div class="section-title">Información del Empleado</div>
+
+<form id="formEmpleado">
+
+<div class="form-group">
+<label>Nombre</label>
+<input type="text" id="nombre">
+</div>
+
+<div class="form-group">
+<label>Apellidos</label>
+<input type="text" id="apellidos">
+</div>
+
+<div class="form-group">
+<label>Tipo de documento</label>
+<select id="tipoDocumento">
+<option value="">Seleccione...</option>
+<option>Cédula</option>
+<option>Pasaporte</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Número de identificación</label>
+<input type="number" id="numeroDocumento">
+</div>
+
+<div class="form-group">
+<label>Fecha de nacimiento</label>
+<input type="date" id="fechaNacimiento">
+</div>
+
+<div class="form-group">
+<label>Estado Civil</label>
+<select id="estadoCivil">
+<option>Soltero</option>
+<option>Casado</option>
+</select>
+</div>
+
+<button type="button" id="btnGuardarEmpleado" onclick="guardarEmpleado()">
+Guardar
+</button>
+
+</form>
+
+<div class="form-group">
+    <label>Buscar por cédula</label>
+    <input type="text" id="buscadorCedula" onkeyup="buscarEmpleado()" placeholder="Ingrese cédula...">
+</div>
+<table class="tabla">
+<thead>
+<tr>
+<th>Nombre</th>
+<th>Apellidos</th>
+<th>Documento</th>
+<th>Fecha Nacimiento</th>
+<th>Estado Civil</th>
+<th>Acciones</th>
+</tr>
+</thead>
+<tbody id="tablaEmpleados"></tbody>
+</table>
+
+</div>
+
+<!-- ================= CONTRATO ================= -->
+<div id="seccionContrato" style="display:none;">
+
+<div class="section-title">Información del Contrato</div>
+
+<div class="form-group">
+<label>Cédula del empleado</label>
+<input type="number" id="cedulaContrato">
+</div>
+
+<div class="form-group">
+<label>Contrato escaneado</label>
+<input type="file" id="contratoEscaneado">
+</div>
+
+<div class="form-group">
+<label>Liquidación escaneada</label>
+<input type="file" id="liquidacionEscaneada">
+</div>
+
+<div class="form-group">
+<label>Cargo</label>
+<input type="text" id="cargo">
+</div>
+
+<div class="form-group">
+<label>Área</label>
+<input type="text" id="area">
+</div>
+
+<div class="form-group">
+<label>Fecha de ingreso</label>
+<input type="date" id="fechaIngreso">
+</div>
+
+<div class="form-group">
+<label>Tipo de contrato</label>
+<select id="tipoContrato">
+<option>Prestación de servicios</option>
+<option>Fijo</option>
+<option>Indefinido</option>
+<option>Por obra o labor</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Fecha de vencimiento</label>
+<input type="date" id="fechaVencimiento">
+</div>
+
+<div class="form-group">
+<label>Remuneración</label>
+<input type="number" id="remuneracion">
+</div>
+
+<div class="form-group">
+<label>Estado</label>
+<select id="estadoContrato">
+<option>Activo</option>
+<option>Finalizado</option>
+<option>Suspendido</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Fecha de retiro</label>
+<input type="date" id="fechaRetiro">
+</div>
+
+<div class="form-group">
+<label>Fecha de pago de liquidación</label>
+<input type="date" id="fechaPagoLiquidacion">
+</div>
+
+<button type="button" id="btnGuardarContrato" onclick="guardarContrato()" class="btn-primary">
+Guardar Contrato
+</button>
+
+<table class="tabla">
+<thead>
+<tr>
+<th>Cédula</th>
+<th>Cargo</th>
+<th>Área</th>
+<th>Fecha Ingreso</th>
+<th>Tipo Contrato</th>
+<th>Remuneración</th>
+<th>Fecha vencimiento</th>
+<th>Estado</th>
+<th>Acciones</th>
+</tr>
+</thead>
+<tbody id="tablaContratos"></tbody>
+</table>
+
+</div>
+
+<!-- ================= SEGURIDAD SOCIAL ================= -->
+<div id="seccionSeguridad" style="display:none;">
+
+<div class="section-title">Información de Seguridad Social</div>
+
+<div class="form-group">
+<label>Cédula del empleado</label>
+<input type="number" id="cedulaSeguridad">
+</div>
+
+<div class="form-group">
+<label>EPS</label>
+<input type="text" id="eps">
+</div>
+
+<div class="form-group">
+<label>Fecha de afiliación EPS</label>
+<input type="date" id="fechaEps">
+</div>
+
+<div class="form-group">
+<label>¿Tiene beneficiarios?</label>
+<select id="beneficiarios">
+<option>Seleccione...</option>
+<option>Sí</option>
+<option>No</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Caja de Compensación</label>
+<input type="text" id="caja">
+</div>
+
+<div class="form-group">
+<label>Fecha de afiliación Caja</label>
+<input type="date" id="fechaCaja">
+</div>
+
+<div class="form-group">
+<label>ARL</label>
+<input type="text" id="arl">
+</div>
+
+<div class="form-group">
+<label>Fecha de afiliación ARL</label>
+<input type="date" id="fechaArl">
+</div>
+
+<div class="form-group">
+<label>¿Enfermedad laboral?</label>
+<select id="enfermedadLaboral">
+<option>Seleccione...</option>
+<option>Sí</option>
+<option>No</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Fondo de Pensiones</label>
+<input type="text" id="pension">
+</div>
+
+<div class="form-group">
+<label>Fondo de Cesantías</label>
+<input type="text" id="cesantias">
+</div>
+
+<button type="button" id="btnGuardarSeguridad" onclick="guardarSeguridad()" class="btn-primary">
+Guardar Seguridad
+</button>
+
+<table class="tabla">
+<thead>
+<tr>
+<th>Cédula</th>
+<th>EPS</th>
+<th>ARL</th>
+<th>Pensión</th>
+<th>Acciones</th>
+</tr>
+</thead>
+<tbody id="tablaSeguridad"></tbody>
+</table>
+
+</div>
+
+</div>
+
+<div id="modalHistorial" class="modal">
+    <div class="modal-content">
+        <span class="cerrar" onclick="cerrarModal()">&times;</span>
+        <h2>Historial del Empleado</h2>
+        <div id="contenidoHistorial"></div>
+    </div>
+</div>
+<div id="seccionEntorno" style="display:none;">
+
+<div class="section-title">Entorno Familiar</div>
+
+<form id="formEntorno">
+
+<!-- ================= INFORMACIÓN PERSONAL ================= -->
+<div class="accordion">
+<h3 onclick="toggleAccordion(this)">Información Personal del Colaborador</h3>
+
+<div class="accordion-content two-columns">
+
+<div class="form-group">
+<label>Cédula del colaborador</label>
+<input type="number" id="cedulaEntorno">
+</div>
+
+<div class="form-group">
+<label>Dirección de domicilio actual</label>
+<input type="text" id="direccion">
+</div>
+
+<div class="form-group">
+<label>Centro médico donde lo atienden</label>
+<input type="text" id="centroMedico">
+</div>
+
+<div class="form-group">
+<label>Teléfono</label>
+<input type="text" id="telefono">
+</div>
+
+<div class="form-group">
+<label>Correo electrónico</label>
+<input type="email" id="correo">
+</div>
+
+<div class="form-group">
+<label>Estado civil</label>
+<select id="estadoCivilEntorno">
+<option>Soltero</option>
+<option>Casado</option>
+<option>Unión libre</option>
+<option>Divorciado</option>
+<option>Viudo</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Medio de transporte</label>
+<input type="text" id="transporte">
+</div>
+
+</div>
+</div>
+
+<!-- ================= NÚCLEO FAMILIAR ================= -->
+<div class="accordion">
+<h3 onclick="toggleAccordion(this)">Composición del Núcleo Familiar</h3>
+
+<div class="accordion-content two-columns">
+
+<div class="form-group">
+<label>Nombre</label>
+<input type="text" id="nfNombre">
+</div>
+
+<div class="form-group">
+<label>Apellidos</label>
+<input type="text" id="nfApellidos">
+</div>
+
+<div class="form-group">
+<label>Parentesco</label>
+<input type="text" id="nfParentesco">
+</div>
+
+<div class="form-group">
+<label>Tipo de documento</label>
+<input type="text" id="nfTipoDoc">
+</div>
+
+<div class="form-group">
+<label>Número de identificación</label>
+<input type="number" id="nfDocumento">
+</div>
+
+<div class="form-group">
+<label>Edad</label>
+<input type="number" id="nfEdad">
+</div>
+
+<div class="form-group">
+<label>Convive en el domicilio</label>
+<select id="nfConvive">
+<option>Sí</option>
+<option>No</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Dependencia económica</label>
+<select id="nfDepende">
+<option>Sí</option>
+<option>No</option>
+</select>
+</div>
+
+</div>
+</div>
+
+<!-- ================= CÓNYUGE ================= -->
+<div class="accordion">
+<h3 onclick="toggleAccordion(this)">Información del Cónyuge</h3>
+
+<div class="accordion-content two-columns">
+
+<div class="form-group">
+<label>Nombre</label>
+<input type="text" id="conNombre">
+</div>
+
+<div class="form-group">
+<label>Apellidos</label>
+<input type="text" id="conApellidos">
+</div>
+
+<div class="form-group">
+<label>Tipo de documento</label>
+<input type="text" id="conTipoDoc">
+</div>
+
+<div class="form-group">
+<label>Número de identificación</label>
+<input type="number" id="conDocumento">
+</div>
+
+<div class="form-group">
+<label>Convive con el colaborador</label>
+<select id="conConvive">
+<option>Sí</option>
+<option>No</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Teléfono</label>
+<input type="text" id="conTelefono">
+</div>
+
+<div class="form-group">
+<label>Correo electrónico</label>
+<input type="email" id="conCorreo">
+</div>
+
+</div>
+</div>
+
+<!-- ================= HIJOS ================= -->
+<div class="accordion">
+<h3 onclick="toggleAccordion(this)">Información de Hijos</h3>
+
+<div class="accordion-content two-columns">
+
+<div class="form-group">
+<label>Nombre</label>
+<input type="text" id="hijoNombre">
+</div>
+
+<div class="form-group">
+<label>Apellidos</label>
+<input type="text" id="hijoApellidos">
+</div>
+
+<div class="form-group">
+<label>Tipo de documento</label>
+<input type="text" id="hijoTipoDoc">
+</div>
+
+<div class="form-group">
+<label>Número de identificación</label>
+<input type="number" id="hijoDocumento">
+</div>
+
+<div class="form-group">
+<label>Edad</label>
+<input type="number" id="hijoEdad">
+</div>
+
+<div class="form-group">
+<label>Colegio (si aplica)</label>
+<input type="text" id="hijoColegio">
+</div>
+
+<div class="form-group">
+<label>Convive con el colaborador</label>
+<select id="hijoConvive">
+<option>Sí</option>
+<option>No</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Persona del cuidado</label>
+<input type="text" id="personaCuidado">
+</div>
+
+<div class="form-group">
+<label>Parentesco</label>
+<input type="text" id="parentescoCuidado">
+</div>
+
+</div>
+</div>
+
+<!-- ================= ACUDIENTE ================= -->
+<div class="accordion">
+<h3 onclick="toggleAccordion(this)">Acudiente de los Hijos (Si aplica)</h3>
+
+<div class="accordion-content two-columns">
+
+<div class="form-group">
+<label>Nombre</label>
+<input type="text" id="acuNombre">
+</div>
+
+<div class="form-group">
+<label>Apellidos</label>
+<input type="text" id="acuApellidos">
+</div>
+
+<div class="form-group">
+<label>Tipo de documento</label>
+<input type="text" id="acuTipoDoc">
+</div>
+
+<div class="form-group">
+<label>Número de identificación</label>
+<input type="number" id="acuDocumento">
+</div>
+
+<div class="form-group">
+<label>Parentesco con los hijos</label>
+<input type="text" id="acuParentesco">
+</div>
+
+<div class="form-group">
+<label>Teléfono</label>
+<input type="text" id="acuTelefono">
+</div>
+
+<div class="form-group">
+<label>Correo electrónico</label>
+<input type="email" id="acuCorreo">
+</div>
+
+</div>
+</div>
+
+<button type="button" onclick="guardarEntornoFamiliar()" class="btn-primary">
+Guardar Entorno Familiar
+</button>
+
+</form>
+
+<table class="tabla">
+<thead>
+<tr>
+<th>Cédula</th>
+<th>Dirección</th>
+<th>Estado Civil</th>
+<th>Acciones</th>
+</tr>
+</thead>
+<tbody id="tablaEntorno"></tbody>
+</table>
+
+</div>
+
+</div>
+<script src="app.js"></script>
+
+</body>
+</html>
+

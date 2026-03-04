@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Columbus & Cia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="login-body">
+
+    <!-- CAJA LOGIN -->
+    <div class="login-container">
+        <div class="login-box">
+        <div class="logos-interno">
+    <img src="img/logo.png" class="logo-izq-box">
+    <img src="img/barbisio.png" class="logo-der-box">
+</div>
+
+            <h2>Columbus & Cia</h2>
+            <p>Ingreso al sistema</p>
+
+            <div class="form-group">
+                <label>Usuario</label>
+                <input type="text" id="usuario">
+            </div>
+
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input type="password" id="password">
+            </div>
+
+            <button class="btn-primary" onclick="login()">
+                Ingresar
+            </button>
+
+            <p id="errorLogin" class="error-text"></p>
+
+        </div>
+    </div>
+
+<script src="app.js"></script>
+</body>
+</html>
